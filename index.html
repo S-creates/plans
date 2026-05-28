@@ -1,0 +1,1327 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Zero-Equipment Aesthetic Recomposition Blueprint</title>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <style>
+    :root {
+      --bg: #080b10;
+      --panel: #111722;
+      --panel-2: #151d2b;
+      --ink: #f3f7fb;
+      --muted: #a7b4c3;
+      --line: rgba(255, 255, 255, .11);
+      --red: #ff4d5f;
+      --orange: #ff9f43;
+      --green: #2ed573;
+      --blue: #4da3ff;
+      --purple: #a66cff;
+      --shadow: 0 24px 60px rgba(0, 0, 0, .35);
+      --radius: 24px;
+      --font: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at top left, rgba(77, 163, 255, .22), transparent 34rem),
+        radial-gradient(circle at top right, rgba(255, 77, 95, .18), transparent 30rem),
+        linear-gradient(135deg, #07090d, var(--bg) 48%, #0a101a);
+      color: var(--ink);
+      font-family: var(--font);
+      line-height: 1.55;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .shell {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .hero {
+      padding: 54px 0 30px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.08fr .92fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .hero-card,
+    .panel {
+      background: linear-gradient(180deg, rgba(255, 255, 255, .075), rgba(255, 255, 255, .035));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+    }
+
+    .hero-card {
+      padding: 34px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero-card:after {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      right: -90px;
+      bottom: -110px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(46, 213, 115, .26), transparent 68%);
+    }
+
+    .eyebrow {
+      color: var(--green);
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      line-height: 1.05;
+      margin: 0;
+    }
+
+    h1 {
+      max-width: 830px;
+      margin-top: 14px;
+      font-size: clamp(2.4rem, 6vw, 5.6rem);
+      letter-spacing: -.07em;
+    }
+
+    h2 {
+      font-size: clamp(1.8rem, 3.5vw, 3.1rem);
+      letter-spacing: -.05em;
+    }
+
+    h3 {
+      font-size: 1.28rem;
+      letter-spacing: -.02em;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    .lead {
+      max-width: 730px;
+      margin-top: 20px;
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 26px;
+    }
+
+    .badge {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 9px 13px;
+      background: rgba(255, 255, 255, .055);
+      color: #dce7f2;
+      font-size: .88rem;
+      font-weight: 750;
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      height: 100%;
+    }
+
+    .stat {
+      padding: 20px;
+      min-height: 134px;
+      background: rgba(17, 23, 34, .78);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+    }
+
+    .stat span {
+      display: block;
+      color: var(--muted);
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .11em;
+      text-transform: uppercase;
+    }
+
+    .stat strong {
+      display: block;
+      margin-top: 8px;
+      font-size: 2rem;
+      line-height: 1;
+    }
+
+    .stat p {
+      margin-top: 9px;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      margin-top: 22px;
+      background: rgba(8, 11, 16, .82);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(18px);
+    }
+
+    .nav-inner {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding: 12px 0;
+    }
+
+    .nav a {
+      flex: 0 0 auto;
+      color: #dce7f2;
+      text-decoration: none;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 9px 13px;
+      background: rgba(255, 255, 255, .04);
+      font-size: .86rem;
+      font-weight: 800;
+    }
+
+    section {
+      padding: 34px 0;
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 20px;
+      align-items: end;
+      margin-bottom: 18px;
+    }
+
+    .section-head p {
+      max-width: 760px;
+      margin-top: 10px;
+      color: var(--muted);
+    }
+
+    .panel {
+      padding: 24px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      position: relative;
+      overflow: hidden;
+      min-height: 100%;
+      padding: 20px;
+      background: rgba(17, 23, 34, .84);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+    }
+
+    .card:before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(135deg, rgba(255, 255, 255, .08), transparent 44%);
+    }
+
+    .card > * {
+      position: relative;
+    }
+
+    .metric {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .visual-hand {
+      width: 86px;
+      height: 112px;
+      position: relative;
+      flex: 0 0 auto;
+    }
+
+    .finger {
+      position: absolute;
+      bottom: 46px;
+      width: 15px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, .94), rgba(255, 255, 255, .35));
+    }
+
+    .finger:nth-child(1) {
+      left: 10px;
+      height: 52px;
+    }
+
+    .finger:nth-child(2) {
+      left: 28px;
+      height: 68px;
+    }
+
+    .finger:nth-child(3) {
+      left: 46px;
+      height: 62px;
+    }
+
+    .finger:nth-child(4) {
+      left: 64px;
+      height: 48px;
+    }
+
+    .palm {
+      position: absolute;
+      left: 12px;
+      bottom: 0;
+      width: 58px;
+      height: 62px;
+      border-radius: 22px 22px 25px 25px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, .88), rgba(255, 255, 255, .32));
+    }
+
+    .thumb {
+      position: absolute;
+      right: 3px;
+      bottom: 18px;
+      width: 20px;
+      height: 42px;
+      border-radius: 999px;
+      transform: rotate(-24deg);
+      background: linear-gradient(180deg, rgba(255, 255, 255, .82), rgba(255, 255, 255, .28));
+    }
+
+    .macro-label {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 42px;
+      height: 42px;
+      margin-bottom: 14px;
+      border-radius: 14px;
+      color: #071014;
+      font-weight: 950;
+    }
+
+    .protein {
+      background: var(--red);
+    }
+
+    .carbs {
+      background: var(--orange);
+    }
+
+    .veg {
+      background: var(--green);
+    }
+
+    .fat {
+      background: var(--blue);
+    }
+
+    .big-number {
+      display: block;
+      margin-top: 10px;
+      font-size: 2.4rem;
+      font-weight: 950;
+      letter-spacing: -.05em;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    ul {
+      padding-left: 18px;
+      margin: 14px 0 0;
+      color: var(--muted);
+    }
+
+    li + li {
+      margin-top: 7px;
+    }
+
+    .plate {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      width: min(330px, 100%);
+      aspect-ratio: 1 / 1;
+      margin: 0 auto;
+      overflow: hidden;
+      border: 10px solid rgba(255, 255, 255, .1);
+      border-radius: 50%;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .12), var(--shadow);
+    }
+
+    .plate div {
+      display: grid;
+      place-items: center;
+      padding: 14px;
+      text-align: center;
+      color: #071014;
+      font-weight: 950;
+    }
+
+    .plate .half {
+      grid-row: span 2;
+      background: var(--green);
+    }
+
+    .plate .quarter-a {
+      background: var(--red);
+    }
+
+    .plate .quarter-b {
+      background: var(--orange);
+    }
+
+    .meal-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .meal {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 16px;
+      background: rgba(255, 255, 255, .04);
+    }
+
+    .meal strong {
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .rule {
+      border-left: 4px solid var(--green);
+    }
+
+    .week-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .tab-btn {
+      appearance: none;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 10px 14px;
+      background: rgba(255, 255, 255, .05);
+      color: var(--ink);
+      cursor: pointer;
+      font-weight: 900;
+      font: inherit;
+    }
+
+    .tab-btn.active {
+      color: #071014;
+      background: var(--green);
+      border-color: transparent;
+    }
+
+    .week-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(260px, 1fr));
+      gap: 16px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+    }
+
+    .day-card {
+      min-width: 260px;
+      background: rgba(17, 23, 34, .9);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      overflow: hidden;
+    }
+
+    .day-head {
+      padding: 18px;
+      background: linear-gradient(135deg, rgba(77, 163, 255, .22), rgba(46, 213, 115, .13));
+      border-bottom: 1px solid var(--line);
+    }
+
+    .day-head span {
+      display: block;
+      color: var(--green);
+      font-size: .78rem;
+      font-weight: 900;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    .day-head h3 {
+      margin-top: 8px;
+    }
+
+    .exercise-list {
+      display: grid;
+      gap: 12px;
+      padding: 16px;
+    }
+
+    .exercise {
+      border: 1px solid rgba(255, 255, 255, .08);
+      border-radius: 16px;
+      padding: 14px;
+      background: rgba(255, 255, 255, .035);
+    }
+
+    .exercise h4 {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 1rem;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      width: fit-content;
+      margin-top: 9px;
+      border-radius: 999px;
+      padding: 6px 9px;
+      color: #071014;
+      background: var(--orange);
+      font-size: .76rem;
+      font-weight: 950;
+      white-space: nowrap;
+    }
+
+    .rx {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 7px;
+      margin-top: 11px;
+    }
+
+    .rx div {
+      border-radius: 12px;
+      padding: 8px;
+      background: rgba(255, 255, 255, .055);
+    }
+
+    .rx span {
+      display: block;
+      color: var(--muted);
+      font-size: .68rem;
+      font-weight: 850;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .rx strong {
+      display: block;
+      margin-top: 2px;
+      font-size: .9rem;
+    }
+
+    .finisher {
+      margin: 0 16px 16px;
+      padding: 16px;
+      border: 1px solid rgba(255, 77, 95, .35);
+      border-radius: 18px;
+      background: rgba(255, 77, 95, .09);
+    }
+
+    .finisher span {
+      display: block;
+      color: var(--red);
+      font-size: .75rem;
+      font-weight: 950;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+
+    .movement-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .movement {
+      display: grid;
+      gap: 12px;
+    }
+
+    .move-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .move-row div {
+      border-radius: 15px;
+      padding: 12px;
+      background: rgba(255, 255, 255, .045);
+      border: 1px solid rgba(255, 255, 255, .08);
+    }
+
+    .move-row span {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--green);
+      font-size: .74rem;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .daily {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(130px, 1fr));
+      gap: 10px;
+      overflow-x: auto;
+    }
+
+    .daily-card {
+      min-width: 130px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 14px;
+      background: rgba(255, 255, 255, .04);
+    }
+
+    .daily-card strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--green);
+    }
+
+    .check {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .check input {
+      margin-top: 4px;
+      accent-color: var(--green);
+    }
+
+    .mermaid-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 18px;
+      background: rgba(255, 255, 255, .04);
+    }
+
+    .print-note {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 9px 13px;
+      color: var(--muted);
+      background: rgba(255, 255, 255, .04);
+      font-size: .88rem;
+      font-weight: 800;
+    }
+
+    footer {
+      padding: 34px 0 54px;
+      color: var(--muted);
+    }
+
+    @media (max-width: 940px) {
+      .hero-grid,
+      .grid-2,
+      .grid-3,
+      .grid-4,
+      .movement-grid,
+      .section-head {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media print {
+      body {
+        background: #fff;
+        color: #101820;
+      }
+
+      .nav,
+      .tab-btn,
+      .print-note {
+        display: none;
+      }
+
+      .hero-card,
+      .panel,
+      .card,
+      .day-card {
+        box-shadow: none;
+        break-inside: avoid;
+        background: #fff;
+        color: #101820;
+        border-color: #d8dee8;
+      }
+
+      .muted,
+      ul,
+      .lead {
+        color: #425166;
+      }
+
+      .week-grid,
+      .movement-grid,
+      .daily {
+        overflow: visible;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="shell hero-grid">
+      <div class="hero-card">
+        <div class="eyebrow">Zero equipment aesthetic recomposition</div>
+        <h1>Arms, chest, jawline and posture blueprint</h1>
+        <p class="lead">A visual, no-counting plan for a 24-year-old, 185 cm, 95 kg male restarting from scratch in Sweden. The system combines high-protein hand portions, water-retention control, dense upper-body calisthenics, posture work and short aggressive finishers.</p>
+        <div class="badge-row">
+          <span class="badge">No gym</span>
+          <span class="badge">No weighing food</span>
+          <span class="badge">ICA / Willys / Coop staples</span>
+          <span class="badge">4-week progression</span>
+          <span class="badge">Arms + chest emphasis</span>
+        </div>
+      </div>
+      <div class="stat-grid">
+        <div class="stat">
+          <span>Starting point</span>
+          <strong>95 kg</strong>
+          <p>Big frame. Recomp needs protein, progressive tension and steady fat loss.</p>
+        </div>
+        <div class="stat">
+          <span>Height</span>
+          <strong>185 cm</strong>
+          <p>Use larger portions than a smaller man while still keeping the plate tight.</p>
+        </div>
+        <div class="stat">
+          <span>Training age</span>
+          <strong>Restart</strong>
+          <p>The first month is about crisp form, joint tolerance and fast strength return.</p>
+        </div>
+        <div class="stat">
+          <span>Main look</span>
+          <strong>V-frame</strong>
+          <p>Shoulders, triceps, back posture, flatter chest and leaner face.</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <nav class="nav">
+    <div class="shell nav-inner">
+      <a href="#overview">Overview</a>
+      <a href="#nutrition">Nutrition</a>
+      <a href="#meals">Meals</a>
+      <a href="#jawline">Jawline rules</a>
+      <a href="#program">4-week program</a>
+      <a href="#movements">Movement library</a>
+      <a href="#daily">Daily checklist</a>
+    </div>
+  </nav>
+
+  <main>
+    <section id="overview">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">System map</div>
+            <h2>What drives the visual change</h2>
+            <p>The chest and face tighten from total fat loss, lower puffiness, better posture and stronger upper-body musculature. The arm look comes from direct triceps, biceps, shoulder and forearm tension repeated hard enough to force adaptation.</p>
+          </div>
+          <button class="tab-btn" onclick="window.print()">Print / Save PDF</button>
+        </div>
+        <div class="panel mermaid-wrap">
+          <pre class="mermaid">
+flowchart LR
+  A[High protein hand portions] --> B[Muscle retention and growth signal]
+  C[Controlled carbs and fats] --> D[Fat loss without calorie counting]
+  E[Daily walking] --> D
+  F[Water, potassium, sleep] --> G[Sharper face and less puffiness]
+  H[Push-up leverage work] --> I[Chest and triceps thickness]
+  J[Pike variations] --> K[Capped shoulders]
+  L[Rows and posture drills] --> M[Chest looks flatter, arms look wider]
+  D --> N[Leaner jawline]
+  B --> O[Dense athletic upper body]
+  I --> O
+  K --> O
+  M --> O
+          </pre>
+        </div>
+      </div>
+    </section>
+
+    <section id="nutrition">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Part 1</div>
+            <h2>Nutrition framework without counting</h2>
+            <p>This is strict but practical. You eat normal foods, judge portions by hand size, and keep protein high enough that fat loss does not flatten your arms, shoulders and chest.</p>
+          </div>
+          <span class="print-note">Use this at every main meal</span>
+        </div>
+
+        <div class="grid-4">
+          <article class="card metric">
+            <div>
+              <span class="macro-label protein">P</span>
+              <h3>Protein</h3>
+              <span class="big-number">2 palms</span>
+              <p class="muted">Every meal. Chicken, fish, eggs, kvarg, skyr, keso, tuna, lean beef or beans plus dairy.</p>
+            </div>
+            <div class="visual-hand" aria-hidden="true">
+              <div class="finger"></div><div class="finger"></div><div class="finger"></div><div class="finger"></div><div class="palm"></div><div class="thumb"></div>
+            </div>
+          </article>
+
+          <article class="card">
+            <span class="macro-label carbs">C</span>
+            <h3>Carbs</h3>
+            <span class="big-number">1-1.5 fists</span>
+            <p class="muted">Training days. Use potatoes, rice, oats, pasta, bread, beans, lentils or fruit. Rest days: 0.5-1 fist.</p>
+          </article>
+
+          <article class="card">
+            <span class="macro-label veg">V</span>
+            <h3>Vegetables</h3>
+            <span class="big-number">2 fists</span>
+            <p class="muted">Every meal if possible. Frozen veg counts. This controls hunger and helps the face look less watery.</p>
+          </article>
+
+          <article class="card">
+            <span class="macro-label fat">F</span>
+            <h3>Fats</h3>
+            <span class="big-number">1 thumb</span>
+            <p class="muted">Olive oil, avocado, nuts, peanut butter, cheese or fatty fish. Keep it deliberate.</p>
+          </article>
+        </div>
+
+        <div class="grid-2" style="margin-top:16px">
+          <div class="panel">
+            <h3>Plate visual</h3>
+            <p class="muted" style="margin:10px 0 18px">Most meals should look like this. If hunger is high, add vegetables first. If training performance crashes, add half a fist of carbs around training.</p>
+            <div class="plate">
+              <div class="half">1/2 plate<br>vegetables</div>
+              <div class="quarter-a">1/4 plate<br>protein</div>
+              <div class="quarter-b">1/4 plate<br>carbs</div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <h3>Daily food rhythm</h3>
+            <ul>
+              <li>3 main meals per day, each built around 2 palms of protein.</li>
+              <li>1 high-protein snack only if hungry or if one meal was light.</li>
+              <li>Training days: keep carbs at breakfast/lunch or before/after training.</li>
+              <li>Rest days: cut carbs slightly, not protein.</li>
+              <li>No liquid calories during the 4-week push.</li>
+              <li>If weight and waist do not move after 10-14 days, remove half a fist of carbs from one meal.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="meals">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Sweden shopping list</div>
+            <h2>Simple high-protein meals from ICA, Willys and Coop</h2>
+            <p>Keep meals boring enough to repeat and tasty enough to follow. Season aggressively: garlic, black pepper, chili, paprika, lemon, dill, curry, onion powder and low-sugar sauces.</p>
+          </div>
+        </div>
+        <div class="grid-3">
+          <div class="panel meal-list">
+            <h3>Breakfast</h3>
+            <div class="meal"><strong>Kvarg power bowl</strong>Kvarg or skyr, oats or muesli, berries or banana, cinnamon, small nuts or peanut butter.</div>
+            <div class="meal"><strong>Egg bread plate</strong>3-4 eggs, wholegrain bread, tomato, cucumber, spinach, optional keso.</div>
+            <div class="meal"><strong>Oats plus dairy</strong>Oats cooked with milk, kvarg stirred in after cooking, apple or berries.</div>
+          </div>
+          <div class="panel meal-list">
+            <h3>Lunch</h3>
+            <div class="meal"><strong>Chicken rice bowl</strong>2 palms chicken, 1 fist rice, 2 fists frozen vegetables, yogurt garlic sauce.</div>
+            <div class="meal"><strong>Tuna potato plate</strong>1-2 tuna cans, boiled potatoes, salad, keso or Greek yogurt sauce.</div>
+            <div class="meal"><strong>Lean beef and lentils</strong>Lean mince, lentils, tomato sauce, rice or potatoes, frozen veg.</div>
+          </div>
+          <div class="panel meal-list">
+            <h3>Dinner</h3>
+            <div class="meal"><strong>Salmon and potatoes</strong>Salmon, potatoes, broccoli or cabbage, lemon, dill, pepper.</div>
+            <div class="meal"><strong>Chicken wrap plate</strong>Chicken, 1-2 wraps, salad, cucumber, tomato, Greek yogurt sauce.</div>
+            <div class="meal"><strong>Bean and egg plate</strong>Beans or lentils, 2-3 eggs, salad, optional rice on training days.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="jawline">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Face definition</div>
+            <h2>3 rules to reduce puffiness and reveal the jawline</h2>
+            <p>You cannot choose where fat leaves first, but you can stop making the face look softer than it needs to. These rules attack water swings, inflammation and poor sleep.</p>
+          </div>
+        </div>
+        <div class="grid-3">
+          <article class="card rule">
+            <h3>1. Keep sodium consistent</h3>
+            <p class="muted">Salt is not the enemy. Big swings are. Keep home meals consistent, and avoid late-night kebab, pizza, chips, instant noodles and salty processed meats during the 4-week push.</p>
+          </article>
+          <article class="card rule">
+            <h3>2. Push potassium and water</h3>
+            <p class="muted">Daily: 2 fruits, 2 large vegetable servings, and steady water. Potatoes, bananas, beans, spinach, tomatoes and yogurt help fluid balance.</p>
+          </article>
+          <article class="card rule">
+            <h3>3. Protect the evening</h3>
+            <p class="muted">Finish the biggest meal 2-3 hours before bed, avoid alcohol, walk 10 minutes after dinner, and sleep 7.5-9 hours. Your face will show it.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="program">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Part 2</div>
+            <h2>4-week arms and chest home calisthenics program</h2>
+            <p>Four days is ideal. If recovery is poor, use Days 1, 2 and 3 only. Every workout starts with the warm-up and ends with the finisher.</p>
+          </div>
+        </div>
+
+        <div class="panel" style="margin-bottom:16px">
+          <div class="grid-2">
+            <div>
+              <h3>Warm-up before every session</h3>
+              <ul>
+                <li>Arm circles: 30 sec forward, 30 sec backward</li>
+                <li>Shoulder rolls: 20 reps</li>
+                <li>Scapular push-ups: 2 x 10</li>
+                <li>Easy incline push-ups: 1 x 10</li>
+                <li>Hip hinges: 15 reps</li>
+                <li>Dead bug: 1 x 8 per side</li>
+                <li>Marching, jumping jacks or light shadow boxing: 60 sec</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Weekly split</h3>
+              <ul>
+                <li>Day 1: Chest, triceps and core</li>
+                <li>Day 2: Back, biceps and posture</li>
+                <li>Day 3: Shoulders, arms and chest</li>
+                <li>Day 4: Full upper pump and conditioning</li>
+                <li>Rest days: walk, posture reset, mobility, protein consistency</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="week-tabs" id="week-tabs"></div>
+        <div class="week-grid" id="week-grid"></div>
+      </div>
+    </section>
+
+    <section id="movements">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Movement library</div>
+            <h2>Regressions and progressions for every key pattern</h2>
+            <p>Choose the version that keeps the target muscle under tension with clean joints. Progress only when every set reaches the top of the range without sloppy reps.</p>
+          </div>
+        </div>
+        <div class="movement-grid" id="movement-grid"></div>
+      </div>
+    </section>
+
+    <section id="daily">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Daily execution</div>
+            <h2>7-day checklist</h2>
+            <p>This is the part that makes the plan work. The workouts are the signal; these habits create the body composition environment.</p>
+          </div>
+        </div>
+        <div class="daily" id="daily-grid"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell">
+      <p>This is not medical care. If chest pain, faintness, severe joint pain or unusual symptoms show up, stop and get proper medical guidance. For body composition: consistency beats extremes.</p>
+    </div>
+  </footer>
+
+  <script>
+    mermaid.initialize({ startOnLoad: true, theme: "dark" });
+
+    const weeks = [
+      {
+        label: "Week 1",
+        focus: "Restart foundation",
+        days: [
+          {
+            title: "Chest + Triceps + Core",
+            exercises: [
+              ["Incline close-grip push-up", "4", "8-12", "75 sec", "3 sec down, 1 sec pause, push hard"],
+              ["Standard push-up", "3", "6-10", "90 sec", "Full range, ribs down"],
+              ["Diamond push-up hold", "3", "10-20 sec", "60 sec", "Halfway position, elbows tucked"],
+              ["Chair triceps dip", "3", "8-12", "75 sec", "Stable chair, shoulders down"],
+              ["Forearm plank", "3", "25-40 sec", "45 sec", "Glutes tight, ribs down"]
+            ],
+            finisher: "8 rounds: 20 sec mountain climbers, 40 sec rest."
+          },
+          {
+            title: "Back + Biceps + Posture",
+            exercises: [
+              ["Door-frame row", "4", "8-12", "75 sec", "Lean back, row chest forward"],
+              ["Under-table row", "4", "6-10", "90 sec", "Only with a heavy stable table"],
+              ["Door-frame biceps curl", "3/arm", "8-12", "45 sec", "Curl body toward frame"],
+              ["Prone Y-T-W raises", "3", "10 each", "60 sec", "Squeeze upper back"],
+              ["Dead bug", "3", "8/side", "45 sec", "Lower back stays down"]
+            ],
+            finisher: "5 rounds: 30 sec high knees, 30 sec jumping jacks, 30 sec rest, 30 sec shadow boxing."
+          },
+          {
+            title: "Shoulders + Arms + Chest",
+            exercises: [
+              ["Pike push-up", "4", "5-8", "90 sec", "Head travels between hands"],
+              ["Wide push-up", "3", "8-12", "75 sec", "Chest focus, controlled depth"],
+              ["Close-grip push-up", "3", "6-10", "75 sec", "Lock out hard for triceps"],
+              ["Self-resisted biceps curl", "3/arm", "10-15", "30 sec", "Resist both curl and lower"],
+              ["Reverse plank", "3", "20-35 sec", "45 sec", "Chest high, glutes tight"]
+            ],
+            finisher: "6 minutes AMRAP: 6 burpees or step-back burpees, 12 mountain climbers per side, 20 jumping jacks."
+          },
+          {
+            title: "Full Upper Pump",
+            exercises: [
+              ["Push-up mechanical drop set", "3", "6-10 + 6-10 + 8-12", "2 min", "Standard, knee, incline"],
+              ["Door-frame row", "4", "10-15", "75 sec", "2 sec squeeze at top"],
+              ["Chair dip", "3", "8-12", "75 sec", "Elbows drive back"],
+              ["Pike shoulder hold", "3", "10-20 sec", "60 sec", "Hold bottom half"],
+              ["Hollow body hold", "3", "15-30 sec", "45 sec", "Tuck if needed"]
+            ],
+            finisher: "8 rounds: 20 sec hard shadow boxing, 10 sec rest. Then 60 sec fast mountain climbers."
+          }
+        ]
+      },
+      {
+        label: "Week 2",
+        focus: "Volume build",
+        days: [
+          {
+            title: "Chest + Triceps + Core",
+            exercises: [
+              ["Incline or flat close-grip push-up", "5", "8-12", "75 sec", "Lower incline if strong"],
+              ["Standard push-up", "4", "6-12", "90 sec", "Stop before form breaks"],
+              ["Diamond push-up or hold", "4", "6-10 or 15-25 sec", "75 sec", "Use incline if needed"],
+              ["Chair dip", "4", "8-12", "75 sec", "Controlled bottom"],
+              ["Forearm plank", "4", "30-45 sec", "45 sec", "No low-back sag"]
+            ],
+            finisher: "10 rounds: 20 sec mountain climbers, 40 sec rest."
+          },
+          {
+            title: "Back + Biceps + Posture",
+            exercises: [
+              ["Door-frame row", "5", "8-12", "75 sec", "More lean than week 1 if clean"],
+              ["Under-table row", "4", "6-10", "90 sec", "Pause at top"],
+              ["Door-frame biceps curl", "4/arm", "8-12", "45 sec", "Slow lower"],
+              ["Prone Y-T-W", "4", "10 each", "60 sec", "Do not shrug"],
+              ["Dead bug", "4", "8-10/side", "45 sec", "Slow full extension"]
+            ],
+            finisher: "8 minutes alternating: 30 sec high knees, 30 sec shadow boxing."
+          },
+          {
+            title: "Shoulders + Arms + Chest",
+            exercises: [
+              ["Pike push-up", "5", "5-8", "90 sec", "Shoulders do the work"],
+              ["Wide push-up", "4", "8-12", "75 sec", "Smooth bottom"],
+              ["Close-grip push-up", "4", "6-10", "75 sec", "Tuck elbows"],
+              ["Self-resisted biceps curl", "4/arm", "12-15", "30 sec", "Make the negative hard"],
+              ["Reverse plank", "4", "25-40 sec", "45 sec", "Open chest"]
+            ],
+            finisher: "7 minutes: 5 burpees, 10 squat thrusts, 20 jumping jacks. Repeat."
+          },
+          {
+            title: "Full Upper Pump",
+            exercises: [
+              ["Push-up mechanical drop set", "4", "max clean sequence", "2 min", "Standard, knee, incline"],
+              ["Door-frame row", "5", "10-15", "75 sec", "Squeeze upper back"],
+              ["Chair dip", "4", "8-12", "75 sec", "Shoulders stay down"],
+              ["Pike shoulder hold", "4", "15-25 sec", "60 sec", "Hold steady"],
+              ["Hollow body hold", "4", "20-35 sec", "45 sec", "Brace hard"]
+            ],
+            finisher: "10 rounds: 20 sec shadow boxing, 10 sec rest."
+          }
+        ]
+      },
+      {
+        label: "Week 3",
+        focus: "Intensity build",
+        days: [
+          {
+            title: "Chest + Triceps",
+            exercises: [
+              ["Close-grip push-up", "5", "8-12", "90 sec", "Flat if possible"],
+              ["1.5-rep push-up", "4", "6-8", "90 sec", "Down, half up, down, full up"],
+              ["Diamond push-up", "4", "5-10", "90 sec", "Incline if wrists complain"],
+              ["Chair dip", "4", "10-15", "75 sec", "Smooth lockout"],
+              ["Plank shoulder taps", "4", "10/side", "45 sec", "Hips quiet"]
+            ],
+            finisher: "12-min EMOM: minute 1 = 10 burpees or step-back burpees, minute 2 = 40 mountain climbers. Repeat 6 times."
+          },
+          {
+            title: "Back + Biceps",
+            exercises: [
+              ["Under-table row", "5", "8-12", "90 sec", "Use bent knees if needed"],
+              ["Door-frame row with squeeze", "4", "10-15", "75 sec", "2 sec squeeze"],
+              ["Door-frame biceps curl", "5/arm", "8-12", "45 sec", "More lean"],
+              ["Self-resisted curl burnout", "2/arm", "20", "30 sec", "Constant tension"],
+              ["Prone swimmers", "4", "20", "60 sec", "Slow shoulder control"],
+              ["Dead bug", "4", "10/side", "45 sec", "No arching"]
+            ],
+            finisher: "10 minutes: 30 sec high knees, 30 sec mountain climbers, 30 sec shadow boxing, 30 sec rest."
+          },
+          {
+            title: "Shoulders + Arms",
+            exercises: [
+              ["Pike push-up", "5", "6-10", "90 sec", "Hips high"],
+              ["Pike push-up negative", "3", "3-5", "90 sec", "5 sec lower"],
+              ["Close-grip push-up", "4", "8-12", "75 sec", "Triceps lockout"],
+              ["Chair dip", "3", "max clean", "90 sec", "Stop before shoulder roll"],
+              ["Self-resisted hammer curl", "4/arm", "12", "30 sec", "Neutral wrist"],
+              ["Reverse plank", "4", "35-45 sec", "45 sec", "Chest tall"]
+            ],
+            finisher: "8 minutes: 8 incline push-ups, 8 squat thrusts, 20 shadow-box punches. Repeat."
+          },
+          {
+            title: "Full Upper Pump",
+            exercises: [
+              ["Push-up drop set", "4", "max clean", "2 min", "Diamond or close, standard, incline"],
+              ["Door-frame row", "5", "12-15", "75 sec", "Controlled reps"],
+              ["Pike push-up", "4", "6-8", "90 sec", "Full shoulder press"],
+              ["Door-frame curl", "4/arm", "10-12", "45 sec", "Slow lower"],
+              ["Hollow hold", "4", "25-40 sec", "45 sec", "Brace and breathe"]
+            ],
+            finisher: "Tabata: 20 sec burpees, 10 sec rest, 8 rounds."
+          }
+        ]
+      },
+      {
+        label: "Week 4",
+        focus: "Definition and performance",
+        days: [
+          {
+            title: "Chest/Triceps Density",
+            exercises: [
+              ["12-min density block", "AMRAP", "8 close + 10 standard + 12 incline + 20 sec plank", "as needed", "Clean rounds only"],
+              ["Chair dips", "4", "12-15", "75 sec", "Full triceps lockout"],
+              ["Diamond push-up hold", "4", "20-30 sec", "60 sec", "Hard squeeze"],
+              ["Plank shoulder taps", "4", "12/side", "45 sec", "Stable hips"]
+            ],
+            finisher: "10 rounds: 15 sec all-out mountain climbers, 45 sec walk/rest."
+          },
+          {
+            title: "Back/Biceps/Posture",
+            exercises: [
+              ["Under-table row", "5", "max clean", "90 sec", "Perfect range"],
+              ["Door-frame row", "4", "15", "75 sec", "Chest to hands"],
+              ["Door-frame biceps curl", "5/arm", "10-15", "45 sec", "Elbow stays fixed"],
+              ["Prone Y-T-W", "4", "10 each", "60 sec", "Upper-back burn"],
+              ["Reverse snow angels", "4", "15", "45 sec", "Slow sweep"],
+              ["Dead bug", "4", "10/side", "45 sec", "Core tight"]
+            ],
+            finisher: "12 minutes: 30 sec shadow boxing, 30 sec high knees, 30 sec jumping jacks, 30 sec rest."
+          },
+          {
+            title: "Shoulders/Arms/Chest",
+            exercises: [
+              ["Pike push-up", "6", "6-10", "90 sec", "Hard shoulder drive"],
+              ["Pike hold", "4", "20-30 sec", "60 sec", "Bottom half"],
+              ["Wide push-up", "4", "10-15", "75 sec", "Chest control"],
+              ["Self-resisted curl", "4/arm", "15", "30 sec", "Crush the eccentric"],
+              ["Self-resisted hammer curl", "3/arm", "12", "30 sec", "Forearm focus"],
+              ["Chair dip", "4", "12-15", "75 sec", "No shoulder pain"]
+            ],
+            finisher: "8 minutes: 5 burpees, 10 mountain climbers per side, 10 push-ups or incline push-ups. Repeat."
+          },
+          {
+            title: "Final Upper Test",
+            exercises: [
+              ["Push-up max test", "1", "max clean", "3 min", "Stop at form break"],
+              ["Row max test", "1", "max clean", "3 min", "Door-frame or under-table"],
+              ["Pike push-up max test", "1", "max clean", "3 min", "No ugly reps"],
+              ["Pump circuit", "4", "10-15 close + 12-15 rows + 10-15 dips + 10 curls/arm + 30 sec hollow", "90 sec", "Four controlled rounds"]
+            ],
+            finisher: "6 rounds: 20 sec burpees or step-back burpees, 20 sec shadow boxing, 20 sec rest."
+          }
+        ]
+      }
+    ];
+
+    const movements = [
+      ["Close-grip push-up", "Hands higher on wall or counter", "Floor close-grip, diamond, 1.5 reps", "Triceps and inner chest"],
+      ["Standard push-up", "Incline or knee push-up", "Pause push-up, slow negative, deficit between books", "Chest tightening"],
+      ["Diamond push-up", "Incline diamond hold", "Full diamond reps, long pauses", "Triceps density"],
+      ["Chair dip", "Bent knees, short range", "Straighter legs, slow lower, longer lockout", "Triceps"],
+      ["Door-frame row", "More upright stance", "Feet closer, lean farther, 2 sec squeeze", "Back posture"],
+      ["Under-table row", "Bent knees and easier angle", "Straight legs, pause at top", "Back and biceps"],
+      ["Door-frame biceps curl", "Less body lean", "More lean, 5 sec lower", "Biceps"],
+      ["Pike push-up", "Hands elevated", "Feet elevated, 5 sec negative", "Capped shoulders"],
+      ["Self-resisted curl", "Lighter opposite-hand pressure", "Harder eccentric, longer set", "Biceps"],
+      ["Reverse plank", "Bent knees", "Straight legs, longer hold", "Posture and posterior chain"],
+      ["Dead bug", "Move legs only", "Full arm and leg reach, slower reps", "Core"],
+      ["Hollow hold", "Tuck hold", "Full hollow, longer lever", "Core and waist control"]
+    ];
+
+    const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+
+    const dailyItems = [
+      "30-45 min walk",
+      "Posture reset",
+      "Protein every meal",
+      "Water steady",
+      "No liquid calories"
+    ];
+
+    function renderWeek(index) {
+      document.querySelectorAll(".tab-btn[data-week]").forEach((btn) => {
+        btn.classList.toggle("active", Number(btn.dataset.week) === index);
+      });
+
+      const grid = document.getElementById("week-grid");
+      const week = weeks[index];
+      grid.innerHTML = week.days.map((day, dayIndex) => `
+        <article class="day-card">
+          <div class="day-head">
+            <span>${week.label} - Day ${dayIndex + 1}</span>
+            <h3>${day.title}</h3>
+            <p class="muted" style="margin-top:8px">${week.focus}</p>
+          </div>
+          <div class="exercise-list">
+            ${day.exercises.map((exercise) => `
+              <div class="exercise">
+                <h4>${exercise[0]}</h4>
+                <div class="rx">
+                  <div><span>Sets</span><strong>${exercise[1]}</strong></div>
+                  <div><span>Reps</span><strong>${exercise[2]}</strong></div>
+                  <div><span>Rest</span><strong>${exercise[3]}</strong></div>
+                </div>
+                <span class="pill">${exercise[4]}</span>
+              </div>
+            `).join("")}
+          </div>
+          <div class="finisher">
+            <span>Cardio finisher</span>
+            <p style="margin-top:8px">${day.finisher}</p>
+          </div>
+        </article>
+      `).join("");
+    }
+
+    function boot() {
+      const tabs = document.getElementById("week-tabs");
+      tabs.innerHTML = weeks.map((week, index) => `<button class="tab-btn" data-week="${index}">${week.label}: ${week.focus}</button>`).join("");
+      tabs.addEventListener("click", (event) => {
+        const button = event.target.closest("[data-week]");
+        if (!button) return;
+        renderWeek(Number(button.dataset.week));
+      });
+
+      const movementGrid = document.getElementById("movement-grid");
+      movementGrid.innerHTML = movements.map((move) => `
+        <article class="card movement">
+          <h3>${move[0]}</h3>
+          <p class="muted">${move[3]}</p>
+          <div class="move-row">
+            <div><span>Easier</span>${move[1]}</div>
+            <div><span>Harder</span>${move[2]}</div>
+          </div>
+        </article>
+      `).join("");
+
+      const dailyGrid = document.getElementById("daily-grid");
+      dailyGrid.innerHTML = days.map((day) => `
+        <div class="daily-card">
+          <strong>${day}</strong>
+          ${dailyItems.map((item) => `
+            <label class="check">
+              <input type="checkbox">
+              <span>${item}</span>
+            </label>
+          `).join("")}
+        </div>
+      `).join("");
+
+      renderWeek(0);
+    }
+
+    boot();
+  </script>
+</body>
+</html>
